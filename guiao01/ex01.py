@@ -53,6 +53,21 @@ def exchange(l,x,y):
         return []
     return [y if l[0] == x else l[0]] + exchange(l[1:],x,y)
 
+# 1.9
+def union(l1,l2):
+    if l1 == []:
+        return l2
+    if l2 == []:
+        return l1
+    return [l1[0]] + union(l1[1:],l2) if l1[0] < l2[0] else [l2[0]] + union(l1,l2[1:])
+
+# 1.10
+def subsets(l):
+    if l == []:
+        return [[]]
+    sub = subsets(l[1:])
+    return sub + [[l[0]] + y for y in sub]
+     
 if __name__ == '__main__':
     my_list = [1,2,3,4,5]
     print("\nList: {}\n".format(my_list))
@@ -66,6 +81,7 @@ if __name__ == '__main__':
     ex1_6 = capicua(my_list)
     ex1_7 = list_concatenation([my_list, [1,2,3,4,5]])
     ex1_8 = exchange(my_list + [2,2,2,2],2,69)
+    ex1_9 = union([1,7,9], [0,8,10])
 
     print("1.1 - Length = {}".format(ex1_1))
     print("1.2 - Sum = {}".format(ex1_2))
@@ -75,3 +91,5 @@ if __name__ == '__main__':
     print("1.6 - Capicua = {}".format(ex1_6))
     print("1.7 - List Concatenation = {}".format(ex1_7))
     print("1.8 - Exchange = {}".format(ex1_8))
+    print("1.9 - Union = {}".format(ex1_9))
+    print("1.10 - Subsets = {}".format(subsets(['a','b','c'])))
