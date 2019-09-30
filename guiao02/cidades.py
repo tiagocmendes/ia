@@ -107,7 +107,7 @@ def search_path(c1,c2,strategy):
     my_tree.strategy = strategy
     return my_tree.search()
 
-print(t.search(9))
-print(t.length)
-
-
+print(f"Result: {t.search(9)}")
+print(f"Length: {t.length}")
+print(f"Terminal: {t.terminal}")
+print(f"Non-terminal: {t.non_terminal}")
