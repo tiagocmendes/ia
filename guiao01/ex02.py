@@ -18,10 +18,25 @@ def remove_e_conta(l, elem):
     else:
         return [l[0]] + r, c
 
+# 2.3
+def counter(l):
+    if len(l) == 1:
+        return [[l[0], 1]]
+    res = counter(l[1:])
+    for i in range(len(res)):
+        if l[0] == res[i][0]:
+            res[i][1] += 1
+            return res 
+    
+    return res + [[l[0], 1]]
+
+
 if __name__ == '__main__':
 
     l = [(1,2),(3,4), (5,6), (7,8)]
     a = separa(l)
     b = remove_e_conta([1,6,2,5,5,2,5,2], 2)
+    c = counter([1,2,3,3,3,5,6,1,2,3])
     print(a)
     print(b)
+    print(c)
