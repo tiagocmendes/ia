@@ -107,7 +107,9 @@ def search_path(c1,c2,strategy):
     my_tree.strategy = strategy
     return my_tree.search()
 
-print(f"Result: {t.search(9)}")
+limit = input("Limit? ")
+print(f"Result: {t.search(int(limit))}")
 print(f"Length: {t.length}")
 print(f"Terminal: {t.terminal}")
 print(f"Non-terminal: {t.non_terminal}")
+print(f"Ramification: {t.ramification}")
