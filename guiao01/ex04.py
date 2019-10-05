@@ -29,6 +29,15 @@ quantificador_existencial = lambda l, f: False if l == [] else f(l[0]) or quanti
 subset = lambda l1, l2: True if l1 == [] else l1[0] in l2 and subset(l1[1:], l2)
 
 # 4.9
+order_relation = lambda n1, n2: n1 < n2
+def special(l, f):
+    if l == []:
+        return None
+    
+    mini = l[0]
+    potential_mini = special(l[1:],f)
+
+    return potential_mini if potential_mini != None and f(potential_mini, mini) else mini
 
 
 if __name__ == "__main__":
@@ -46,3 +55,4 @@ if __name__ == "__main__":
     print("Quantificador existencial: {} > 0? {}".format([-1,-2,-3], quantificador_existencial([-1,2,-3], positive)))
     print("Subconjunto: {} C {}? {}".format([1,2,3],[1,2,3,4,5,6], subset([1,2,3],[1,2,3,4,5,6])))
     print("Subconjunto: {} C {}? {}".format([1,2,3],[1,2,4,5,6], subset([1,2,3],[1,2,4,5,6])))
+    print("Mini of {}: {}".format([12,51,4,61,3,2,7], special([12,51,4,61,3,2,7], order_relation)))
