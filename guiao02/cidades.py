@@ -26,8 +26,15 @@ class Cidades(SearchDomain):
         (C1,C2) = action
         if C1==cidade:
             return C2
-    def cost(self, state, action):
-        pass
+    def cost(self, cidade, action):
+        (C1, C2) = action
+        if C1 != cidade:
+            None
+        for (c1, c2, dist) in self.connections:
+            if (c1, c2) == action or (c2, c1) == action:
+                return dist
+        return None
+        
     def heuristic(self, state, goal_state):
         pass
 
@@ -98,7 +105,7 @@ cidades_portugal = Cidades(
 
 
 p = SearchProblem(cidades_portugal,'Braga','Faro')
-t = SearchTree(p,'depth')
+t = SearchTree(p,'uniform')
 
 # Atalho para obter caminho de c1 para c2 usando strategy:
 def search_path(c1,c2,strategy):
@@ -113,3 +120,4 @@ print(f"Length: {t.length}")
 print(f"Terminal: {t.terminal}")
 print(f"Non-terminal: {t.non_terminal}")
 print(f"Ramification: {t.ramification}")
+print(f"Total cost: {t.total_cost}")
