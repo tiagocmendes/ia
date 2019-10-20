@@ -7,7 +7,7 @@
 # (c) Luis Seabra Lopes, Introducao a Inteligencia Artificial, 2012/2013
 #
 
-
+import math
 from tree_search import *
 
 class Cidades(SearchDomain):
@@ -36,7 +36,9 @@ class Cidades(SearchDomain):
         return None
         
     def heuristic(self, state, goal_state):
-        pass
+        x1, y1 = self.coordinates[state]
+        x2, y2 = self.coordinates[goal_state]
+        return math.hypot(x1-x2, y1-y2)
 
 cidades_portugal = Cidades( 
                     # Ligacoes por estrada
@@ -105,7 +107,7 @@ cidades_portugal = Cidades(
 
 
 p = SearchProblem(cidades_portugal,'Braga','Faro')
-t = SearchTree(p,'uniform')
+t = SearchTree(p,'a*')
 
 # Atalho para obter caminho de c1 para c2 usando strategy:
 def search_path(c1,c2,strategy):
@@ -121,3 +123,5 @@ print(f"Terminal: {t.terminal}")
 print(f"Non-terminal: {t.non_terminal}")
 print(f"Ramification: {t.ramification}")
 print(f"Total cost: {t.cost}")
+print(f"Cummulative cost: {t.cumulative_cost[0].cost}")
+print(f"Average depth: {t.average_depth}")
