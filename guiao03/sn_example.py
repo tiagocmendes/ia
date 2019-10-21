@@ -1,7 +1,3 @@
-
-
-
-
 # Redes semanticas
 # -- Exemplo
 # 
@@ -80,6 +76,5 @@ z.insert(Declaration('damasio', Member('socrates','filosofo')))
 #z.insert(Declaration('darwin', AssocOne('socrates','pai','pericles')))
 #z.insert(Declaration('descartes', AssocOne('socrates','pai','sofronisco')))
 
-print(z.list_associations())
-
-
+print(f"Alínea 3. a): {z.list_associations()}")
+print(f"Alínea 3. b): {z.list_objects()}")

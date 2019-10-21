@@ -98,6 +98,8 @@ class SemanticNetwork:
     def list_associations(self):
         return list(set([ d.relation.name for d in self.declarations if isinstance(d.relation, Association) ]))
 
+    def list_objects(self):
+        return list(set([ d.relation.entity1 for d in self.declarations if isinstance(d.relation, Member) ]))
 
 # Funcao auxiliar para converter para cadeias de caracteres
 # listas cujos elementos sejam convertiveis para
