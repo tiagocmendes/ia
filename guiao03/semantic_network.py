@@ -144,22 +144,31 @@ class SemanticNetwork:
         return None
 
     def query(self, entity, relation=None):
-        ancestors = [self.query(d.relation.entity2, relation) for d in self.declarations if d.relation.entity1 == entity and (isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
+        ancestors = [self.query(d.relation.entity2, relation) for d in self.declarations if d.relation.entity1 == entity and (
+            isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
 
-        return [item for sublist in ancestors for item in sublist] + self.query_local(e1 = entity, rel=relation)
+        return [item for sublist in ancestors for item in sublist] + self.query_local(e1=entity, rel=relation)
 
     def query2(self, entity, relation=None):
-        ancestors = [self.query2(d.relation.entity2, relation) for d in self.declarations if d.relation.entity1 == entity and (isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
+        ancestors = [self.query2(d.relation.entity2, relation) for d in self.declarations if d.relation.entity1 == entity and (
+            isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
 
         return [item for sublist in ancestors for item in sublist if isinstance(item.relation, Association)] + self.query_local(e1=entity, rel=relation)
 
     def query_cancel(self, entity, relation):
-        pass 
+        ancestors = [self.query_cancel(d.relation.entity2, relation) for d in self.declarations if d.relation.entity1 == entity and (
+            isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
+
+        local_decl = self.query_local(e1=entity, rel=relation)
+
+        return [item for sublist in ancestors for item in sublist if item.relation.name not in [d.relation.name for d in local_decl]] + local_decl
 
     def query_down(self, entity, relation):
-        descendents = [self.query_down(d.relation.entity1, relation) for d in self.declarations if d.relation.entity2 == entity and (isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
+        descendents = [self.query_down(d.relation.entity1, relation) for d in self.declarations if d.relation.entity2 == entity and (
+            isinstance(d.relation, Member) or isinstance(d.relation, Subtype))]
 
         return [item for sublist in descendents for item in sublist] + self.query_local(e1 = entity, rel = relation)
+
 
 # Funcao auxiliar para converter para cadeias de caracteres
 # listas cujos elementos sejam convertiveis para
